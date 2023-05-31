@@ -56,10 +56,10 @@ class FitCalculatorTest {
         double height = 1.80;
 
         //when
-        boolean result = FitCalculator.isBMICorrect(weight, height);
+        boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         //then
-        Assertions.assertTrue(result);
+        Assertions.assertTrue(recommended);
     }
     @ParameterizedTest(name = "weight: {0}, height{1}")
     @CsvSource({
@@ -72,23 +72,23 @@ class FitCalculatorTest {
         //brak potrzeby, dostarczane jako parametry
 
         //when
-        boolean result = FitCalculator.isBMICorrect(weight, height);
+        boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         //then
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(recommended);
     }
 
     @ParameterizedTest(name = "height={0}, weight={1}")
     @CsvFileSource(resources = "/data.csv", numLinesToSkip  = 1)
-    void shouldReturnFalse_whenDietIsRecommendedFromFile(double height, double weight) {
+    void shouldReturnFalse_whenDietIsNotRecommendedFromFile(double height, double weight) {
         //given
         //brak potrzeby, dostarczane z pliku CSV
 
         //ghen
-        boolean result = FitCalculator.isBMICorrect(weight, height);
+        boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         //then
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(recommended);
     }
 
     @Test
